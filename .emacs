@@ -13,9 +13,10 @@
 (require 'cl)
 
 (defvar my-packages
-  '(ack-and-a-half auto-complete ergoemacs-mode smex
+  '(ack-and-a-half auto-complete ergoemacs-mode smex flx-ido
 		   popup yasnippet
-		   projectile projectile-rails rbenv flymake-ruby
+		   projectile projectile-rails rbenv
+		   flymake-ruby inf-ruby robe company
 		   yaml-mode
 	)
   "A list of packages to ensure are installed at launch.")
@@ -48,10 +49,23 @@
 (setq linum-format "%d ")
 (global-linum-mode 1)
 
-;; built-in
-(require 'ido)
-(ido-mode t)
+;; Flx ido support
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
 (setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+;; Display ido results vertically, rather than horizontally
+ (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+  (defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
+  (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+  (defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+    (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+    (define-key ido-completion-map (kbd "<top>") 'ido-prev-match))
+  (add-hook 'ido-setup-hook 'ido-define-keys)
 
 ;; built-in
 (require 'bs)
@@ -72,6 +86,25 @@
                   ; when Smex is auto-initialized on its first run.
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+;; Auto-indent new lines
+(electric-indent-mode 1)
+
+;;; Indentation for python
+
+;; Ignoring electric indentation
+(defun electric-indent-ignore-python (char)
+  "Ignore electric indentation for python-mode"
+  (if (equal major-mode 'python-mode)
+      'no-indent
+    nil))
+(add-hook 'electric-indent-functions 'electric-indent-ignore-python)
+
+;; Enter key executes newline-and-indent
+(defun set-newline-and-indent ()
+  "Map the return key with `newline-and-indent'"
+  (local-set-key (kbd "RET") 'newline-and-indent))
+(add-hook 'python-mode-hook 'set-newline-and-indent)
 
 
 ;; Autocomplete
@@ -150,3 +183,14 @@
 ;; Syntax check
 (require 'flymake-ruby)
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
+
+;; Sane indentation
+(setq ruby-deep-indent-paren nil)
+
+;; Autocomplete for Ruby
+(global-company-mode t)
+(push 'company-robe company-backends)
+
+;; Setting rbenv path
+(setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:" (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
+(setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims") (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
