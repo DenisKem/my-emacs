@@ -15,7 +15,7 @@
 (defvar my-packages
   '(ack-and-a-half auto-complete ergoemacs-mode smex
 		   popup yasnippet
-		   projectile projectile-rails rbenv
+		   projectile projectile-rails rbenv flymake-ruby
 		   yaml-mode
 	)
   "A list of packages to ensure are installed at launch.")
@@ -146,3 +146,7 @@
 
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+;; Syntax check
+(require 'flymake-ruby)
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
