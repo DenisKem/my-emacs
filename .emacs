@@ -15,7 +15,7 @@
 (defvar my-packages
   '(ack-and-a-half auto-complete ergoemacs-mode smex
 		   popup yasnippet
-		   projectile projectile-rails
+		   projectile projectile-rails rbenv
 		   yaml-mode
 	)
   "A list of packages to ensure are installed at launch.")
@@ -132,6 +132,9 @@
 
 (require 'projectile-rails)
 (global-set-key (kbd "C-c p C-f") 'projectile-grep)
+
+(require 'rbenv)
+(global-rbenv-mode)
 
 (add-to-list 'auto-mode-alist
                '("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
