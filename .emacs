@@ -14,10 +14,10 @@
 
 (defvar my-packages
   '(ack-and-a-half auto-complete ergoemacs-mode smex flx-ido
-		   popup yasnippet
+		   popup yasnippe magit
 		   projectile projectile-rails rbenv
 		   flymake-ruby inf-ruby robe company
-		   yaml-mode
+		   yaml-mode slim-mode haml-mode
 	)
   "A list of packages to ensure are installed at launch.")
 
@@ -129,7 +129,8 @@
  '(ergoemacs-theme "standard")
  '(ergoemacs-theme-options nil)
  '(ergoemacs-use-menus t)
- '(initial-scratch-message ";; This buffer is for notes you don't want to save, and for Lisp evaluation.
+ '(initial-scratch-message
+   ";; This buffer is for notes you don't want to save, and for Lisp evaluation.
 ;; If you want to create a file, visit that file with C-x C-f,
 ;; then enter the text in that file's own buffer.
 
@@ -194,3 +195,11 @@
 ;; Setting rbenv path
 (setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:" (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
 (setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims") (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
+
+(require 'slim-mode)
+(require 'haml-mode)
+(require 'coffee-mode)
+
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(ergoemacs-mode 1)
