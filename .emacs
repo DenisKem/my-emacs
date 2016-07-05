@@ -204,6 +204,10 @@
 (require 'haml-mode)
 (require 'coffee-mode)
 
+;; Scss support
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (ergoemacs-mode 1)
