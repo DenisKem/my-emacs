@@ -14,7 +14,7 @@
 
 (defvar my-packages
   '(ack-and-a-half auto-complete ergoemacs-mode smex flx-ido
-		   popup yasnippe magit
+		   popup yasnippet magit
 		   projectile projectile-rails rbenv
 		   flymake-ruby inf-ruby robe company
 		   yaml-mode slim-mode haml-mode
@@ -135,6 +135,7 @@
 ;; then enter the text in that file's own buffer.
 
 ")
+ '(recentf-menu-before "Open File...")
  '(scroll-error-top-bottom nil)
  '(set-mark-command-repeat-pop nil)
  '(shift-select-mode t)
