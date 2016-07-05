@@ -163,6 +163,9 @@
 
 (require 'projectile)
 
+;; Nginx support
+(require 'nginx-mode)
+
 ;; All for my Ruby on Rails work
 
 (require 'projectile-rails)
