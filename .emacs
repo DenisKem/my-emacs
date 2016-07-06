@@ -18,6 +18,7 @@
 		   projectile projectile-rails rbenv
 		   flymake-ruby inf-ruby robe company
 		   yaml-mode slim-mode haml-mode
+		   nginx-mode scss-mode coffee-mode
 	)
   "A list of packages to ensure are installed at launch.")
 
