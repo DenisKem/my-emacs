@@ -14,7 +14,7 @@
 
 (defvar my-packages
   '(ack-and-a-half auto-complete ergoemacs-mode smex flx-ido
-		   popup yasnippet magit
+		   popup yasnippet magit emmet-mode
 		   projectile projectile-rails rbenv
 		   flymake-ruby inf-ruby robe company
 		   yaml-mode slim-mode haml-mode
@@ -203,6 +203,12 @@
 (require 'slim-mode)
 (require 'haml-mode)
 (require 'coffee-mode)
+
+;; Emmet
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'SCSS-mode-hook  'emmet-mode)
 
 ;; Scss support
 (autoload 'scss-mode "scss-mode")
